@@ -15,4 +15,10 @@ chdir(dirname(__FILE__).'/../../../..');
 
 require_once 'config/ProjectConfiguration.class.php';
 $configuration = new ProjectConfiguration(realpath($_test_dir.'/../../../'));
+
+//    $configuration = ProjectConfiguration::getApplicationConfiguration( 'pc_frontend', 'all', true);
+//    $databaseManager = new sfDatabaseManager($configuration);
+
+
+
 include($configuration->getSymfonyLibDir().'/vendor/lime/lime.php');

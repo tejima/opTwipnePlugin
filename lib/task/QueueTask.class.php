@@ -23,9 +23,7 @@ EOF;
   {
     //$this->logMessage('QueueTask', 'info');
     //sfOpenPNEApplicationConfiguration::registerZend();
-    $app = sfYaml::load(sfConfig::get('sf_root_dir').'/plugins/twipnePlugin/config/app.yml');
 
-    $this->queue = TwipneQueue::getInstance();
     $databaseManager = new sfDatabaseManager($this->configuration);
 
     if($options['mode'] == 'auto'){
@@ -94,7 +92,7 @@ EOF;
             echo "    ". $event->id . "\n";
             print_r($event->content->text);
 
-            $result = $this->queue->processQueing($member,$event->content->text);
+            $result = TwipneQueue::processQueing($member->getId(),$event->content->text);
             if($result){
               $event->title = $service->newTitle("【完了】".$event->title);
               $event->save();
@@ -120,7 +118,7 @@ EOF;
     foreach($mclist as $mcline){
       if(!is_null($mcline['member_id']) && !is_null($mcline['value'])){
         $member = Doctrine::getTable('Member')->find($mcline['member_id']);
-        $this->queue->processQueing($member,$mcline['value']);
+        TwipneQueue::processQueing($member->getId(),$mcline['value']);
       }
     }
   } 
@@ -175,10 +173,10 @@ EOF;
                 }
               }
               if($result){
-                $this->queue->processQueing($m,$m->getConfig('TWITTERDIRECT_KEYWORD')."\n".$tlline->text);
+                TwipneQueue::processQueing($m->getId(),$m->getConfig('TWITTERDIRECT_KEYWORD')."\n".$tlline->text);
               }
             }else{
-              $this->queue->processQueing($m,$tlline->text);
+              TwipneQueue::processQueing($m->getId(),$tlline->text);
             }
           }
         }
@@ -210,7 +208,7 @@ EOF;
           $timestamp = strtotime($tlline->created_at);
           if(time() - 300 < $timestamp){
             echo "\n--------\nscreen_name:" . $tlline->user->screen_name  , "\n" . $tlline->text . "\n" . $tlline->id;
-            $this->queue->processQueing($m,$tlline->text);
+            TwipneQueue::processQueing($m->getId(),$tlline->text);
           }
         }
       }
@@ -229,12 +227,11 @@ EOF;
   }
 
   private function processPOP3(){
-    $app = sfYaml::load(sfConfig::get('sf_root_dir').'/plugins/twipnePlugin/config/app.yml');
     echo "---------------------------->processPOP3() @pne.jp \n";
     try{
-      $mail = new Zend_Mail_Storage_Pop3(array('host' => 'pop.gmail.com' ,
-                                              'user' => $app['all']['twipne_config']['pop3user'],
-                                              'password' => $app['all']['twipne_config']['pop3pass'],
+      $mail = new Zend_Mail_Storage_Pop3(array('host' => Doctrine::getTable('SnsConfig')->get('optwipneplugin_pop3_host','pop.gmail.com') ,
+                                              'user' => Doctrine::getTable('SnsConfig')->get('optwipneplugin_pop3_user',null),
+                                              'password' => Doctrine::getTable('SnsConfig')->get('optwipneplugin_pop3_pass',null),
                                               'ssl' => 'SSL',
                                               'port' => 995)
                                       );
@@ -246,7 +243,7 @@ EOF;
         mb_internal_encoding('UTF-8');
         $raw_data = $mail->getRawHeader(1) . "\r\n\r\n" .  $mail->getRawContent(1);
         $opMessage = new opMailMessage(array('raw' =>$raw_data));
-        $re = '/' . $app['all']['twipne_config']['mailprefix'] . '\+(.*?)\+([0-9]+)@pne\.jp/';
+        $re = '/' . Doctrine::getTable('SnsConfig')->get('optwipneplugin_mailprefix','noneprefix'); . '\+(.*?)\+([0-9]+)@pne\.jp/';
         preg_match($re,$opMessage->getHeader('To'),$matches);
 	if(!$matches){
 		return;
@@ -271,7 +268,7 @@ EOF;
           }
         
 
-        $this->queue->processQueing($member,$opMessage->getContent());
+        TwipneQueue::processQueing($member->getId(),$opMessage->getContent());
         $mail->removeMessage(1);
     }catch(Exception $e){
        echo $e->getMessage();

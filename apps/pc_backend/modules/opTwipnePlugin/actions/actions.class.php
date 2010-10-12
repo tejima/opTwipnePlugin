@@ -25,6 +25,15 @@ class opTwipnePluginActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    $this->forward('default', 'module');
+    $this->form = new opTwipnePluginConfigForm();
+    if ($request->isMethod(sfWebRequest::POST))
+    {
+      $this->form->bind($request->getParameter('twipne'));
+      if ($this->form->isValid())
+      {
+        $this->form->save();
+        $this->redirect('opTwipnePlugin/index');
+      }
+    }
   }
 }

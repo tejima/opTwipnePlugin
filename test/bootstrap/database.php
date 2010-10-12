@@ -11,7 +11,6 @@
 $configuration = ProjectConfiguration::getApplicationConfiguration('pc_frontend', 'test', true);
 
 new sfDatabaseManager($configuration);
-
 $task = new sfDoctrineBuildTask($configuration->getEventDispatcher(), new sfFormatter());
 $task->setConfiguration($configuration);
 $task->run(array(), array(

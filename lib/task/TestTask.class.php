@@ -12,11 +12,8 @@ class TestTask extends sfBaseTask
     $this->briefDescription = '';
     $this->sqs = null;
     $this->detailedDescription = <<<EOF
-The [feed-reader|INFO] task does things.
-Call it with:
-
-  [php symfony socialagent:feed-reader [--env="..."] application|INFO]
 EOF;
+
     //$this->addArgument('application', sfCommandArgument::REQUIRED, 'The application name');
     $this->addOption('mode', null, sfCommandOption::PARAMETER_OPTIONAL, 'The environment', null);
     $this->addOption('command', null, sfCommandOption::PARAMETER_OPTIONAL, 'command param', null);
@@ -26,20 +23,11 @@ EOF;
   {
     sfOpenPNEApplicationConfiguration::registerZend();
     $databaseManager = new sfDatabaseManager($this->configuration);
-    $app = sfYaml::load(sfConfig::get('sf_root_dir').'/plugins/twipnePlugin/config/app.yml');
-    Zend_Service_Amazon_Sqs::setKeys($app['all']['twipne_config']['accesskey'],$app['all']['twipne_config']['secretaccesskey']);
+    //Doctrine::getTable('SnsConfig')->
+    $awt_accesskey = Doctrine::getTable('SnsConfig')->get('optwipneplugin_aws_accesskey',null);
+    $awt_secret = Doctrine::getTable('SnsConfig')->get('optwipneplugin_aws_secret',null);
+    Zend_Service_Amazon_Sqs::setKeys($awt_accesskey,$awt_secret);
     $this->sqs = new Zend_Service_Amazon_Sqs();
-    /*
-    $handle = fopen('/tmp/IMGznxD6X','r');
-    $data = fread($handle,filesize('/tmp/IMGznxD6X'));
-    //print_r($data);
-    $client = new Zend_Rest_Client('http://twitpic.com/api/upload');
-    $client->username('tejicube');
-    $client->password('aoisora');
-    $client->media($data);
-    $result = $client->post();
-    print_r($result);
-    */
     //$this->teststrcut();
     //$this->test_member();
     //$this->test_insert_entry();
@@ -76,11 +64,19 @@ EOF;
     //$this->test_twitter();
     //$this->test_sepalator2();
     //$this->test_TwipneQueue();
-    $this->test_reg();
-
+    //$this->test_reg();
+    $this->test_postqueue();
   }
 
+  private function test_postqueue(){
+    $queue_url = $this->sqs->create("test_queue");
+    $this->sqs->send($queue_url, "TESTQUEUE");
+    $queue = $this->sqs->create('test_queue');
+    foreach($this->sqs->receive($queue,5,3) as $message){
+      print_r($message);
+    }
 
+  }
   private function test_reg(){
     $target = "あ\nぼおおおおおおおおおおお";
     //$target = "あ い う え お あああああああああああ";
