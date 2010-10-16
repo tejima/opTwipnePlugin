@@ -243,7 +243,7 @@ EOF;
         mb_internal_encoding('UTF-8');
         $raw_data = $mail->getRawHeader(1) . "\r\n\r\n" .  $mail->getRawContent(1);
         $opMessage = new opMailMessage(array('raw' =>$raw_data));
-        $re = '/' . Doctrine::getTable('SnsConfig')->get('optwipneplugin_mailprefix','noneprefix'); . '\+(.*?)\+([0-9]+)@pne\.jp/';
+        $re = '/' . Doctrine::getTable('SnsConfig')->get('optwipneplugin_mailprefix','noneprefix') . '\+(.*?)\+([0-9]+)@pne\.jp/';
         preg_match($re,$opMessage->getHeader('To'),$matches);
 	if(!$matches){
 		return;
