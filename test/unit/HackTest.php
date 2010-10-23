@@ -5,11 +5,30 @@ require_once dirname(__FILE__).'/../bootstrap/unit.php';
 $t = new lime_test();
 $t->comment("lime drive");
 
+
+
 $test_member_id = 2;
 $m =  Doctrine::getTable('Member')->find($test_member_id);
 
-$t->ok(test_google_auth($m),"test_google_auth");
-$t->ok(processCalendar($m),"processCalendar");
+
+$t->ok(test_googleapps_auth($m),"test_googleapps_auth");
+
+//$t->ok(test_google_auth($m),"test_google_auth");
+//$t->ok(processCalendar($m),"processCalendar");
+
+
+function test_google_calendar_list($member = null){
+
+  $user = $member->getConfig('GOOGLEID');
+  $pass = $member->getConfig('GOOGLEPASS');
+  $service = Zend_Gdata_Spreadsheets::AUTH_SERVICE_NAME;
+  $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
+  $spreadsheetService = new Zend_Gdata_Spreadsheets($client);
+  $feed = $spreadsheetService->getSpreadsheetFeed();
+
+  print_r($feed);
+}
+
 
 function test_google_auth($member = null)
 {

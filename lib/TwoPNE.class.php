@@ -73,8 +73,6 @@ class TwoPNE
   public static function isAWSKeysCorrect(){
     $aws_accesskey = opConfig::get('optwipneplugin_aws_accesskey',null);
     $aws_secret = opConfig::get('optwipneplugin_aws_secret',null);
-    //$aws_accesskey = Doctrine::getTable('SnsConfig')->get('optwipneplugin_aws_accesskey',null);
-    //$aws_secret = Doctrine::getTable('SnsConfig')->get('optwipneplugin_aws_secret',null);
     if(!$aws_accesskey || !$aws_secret){
       return false;
     }
