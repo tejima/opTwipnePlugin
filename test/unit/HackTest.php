@@ -11,6 +11,7 @@ $test_member_id = 2;
 $m =  Doctrine::getTable('Member')->find($test_member_id);
 
 
+
 $t->ok(test_googleapps_auth($m),"test_googleapps_auth");
 
 //$t->ok(test_google_auth($m),"test_google_auth");

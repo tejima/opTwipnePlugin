@@ -1,143 +1,19 @@
-mail2pne:
+pne2twitter:
   _attributes:
-    caption:        "mail→pne設定"
+    caption:        "「つ」pne→twitter"
     enable_pc:      true
     enable_mobile:  true
-  MAILKEYWORD:
-    Name:           "MAILKEYWORD"
-    Caption:        "メール投稿用のキーワード"
+  DUMMY:
+    Name:         "DUMMY"
+    Caption:        "ダミー(入力必要なし)"
     FormType:       "input"
     ValueType:      "pass"
     IsRegist:       false
     IsConfig:       true
     IsRequired:     false
-    IsConfirm:      false
-sepalator:
-  _attributes:
-    caption:        "件名本文セパレータ"
-    enable_pc:      true
-    enable_mobile:  true
-  SEPARATOR_LF:
-    Name:           "SEPARATOR_LF"
-    Caption:        "改行をセパレータにする？"
-    FormType:       "radio"
-    Choices:        {"1":"する","2":"しない"}
-    Default:        "1"
-    ValueType:      "int"
-    IsRegist:       false
-    IsConfig:       true
-    IsRequired:     false
-    IsConfirm:      false
-  SEPARATOR_KEYWORDS:
-    Name:           "SEPARATOR_KEYWORDS"
-    Caption:        "その他のセパレータ文字列（半角スペース区切り）"
-    FormType:       "input"
-    ValueType:      "pass"
-    IsRegist:       false
-    IsConfig:       true
-    IsRequired:     false
-    IsConfirm:      false
-twitter2pne:
-  _attributes:
-    caption:        "twitter→pne設定"
-    enable_pc:      true
-    enable_mobile:  true
-  PRIV8TWITTERNAME:
-    Name:           "PRIV8TWITTERNAME"
-    Caption:        "投稿用 twitter ID"
-    FormType:       "input"
-    ValueType:      "pass"
-    IsRegist:       false
-    IsConfig:       true
-    IsRequired:     false
-    IsConfirm:      false
-  PRIV8TWITTERPASS:
-    Name:           "PRIV8TWITTERPASS"
-    Caption:        "投稿用 twitterパスワード"
-    FormType:       "password"
-    ValueType:      "pass"    
-    IsRegist:       false
-    IsConfig:       true
-    IsRequired:     false
-    IsConfirm:      false
-  TWITTERDIRECT:
-    Name:           "TWITTERDIRECT"
-    Caption:        "【ラボ機能】twitterダイレクトモード"
-    FormType:       "radio"
-    Choices:        {1: "使う",2: "使わない"}
-    Default:        "2"
-    ValueType:      "int"
-    IsRegist:       false
-    IsConfig:       true
-    IsRequired:     false
-    IsConfirm:      false
-  TWITTERDIRECT_KEYWORD:
-    Name:           "TWITTERDIRECT_KEYWORD"
-    Caption:        "【ラボ機能】twitterダイレクトモードの投稿キーワード"
-    FormType:       "input"
-    ValueType:      "pass"
-    IsRegist:       false
-    IsConfig:       true
-    IsRequired:     false
-    IsConfirm:      false
-  TWITTER_EXCLUDE:
-    Name:           "TWITTER_EXCLUDE"
-    Caption:        "文頭にこのキーワードが入っていたら投稿しない（半角スペース区切り）"
-    FormType:       "input"
-    ValueType:      "pass"
-    IsRegist:       false
-    IsConfig:       true
-    IsRequired:     false
-    IsConfirm:      false
-twitter2pne2:
-  _attributes:
-    caption:        "twitter→pne設定2"
-    enable_pc:      true
-    enable_mobile:  true
-  PRIV8TWITTERNAME2:
-    Name:           "PRIV8TWITTERNAME2"
-    Caption:        "投稿用 twitter ID"
-    FormType:       "input"
-    ValueType:      "pass"
-    IsRegist:       false
-    IsConfig:       true
-    IsRequired:     false
-    IsConfirm:      false
-  PRIV8TWITTERPASS2:
-    Name:           "PRIV8TWITTERPASS2"
-    Caption:        "投稿用 twitterパスワード"
-    FormType:       "password"
-    ValueType:      "pass"
-    IsRegist:       false
-    IsConfig:       true
-    IsRequired:     false
-    IsConfirm:      false
-calendar2pne:
-  _attributes:
-    caption:        "【ラボ機能】GoogleCalendar→pne設定"
-    enable_pc:      true
-    enable_mobile:  true
-  GOOGLEID:
-    Name:           "GOOGLEID"
-    Caption:        "カレンダー用GOOGLEID"
-    FormType:       "input"
-    ValueType:      "pass"
-    IsRegist:       false
-    IsConfig:       true
-    IsRequired:     false
-    IsConfirm:      false
-  GOOGLEPASS:
-    Name:           "GOOGLEPASS"
-    Caption:        "GOOGLEパスワード"
-    FormType:       "password"
-    ValueType:      "pass"
-    IsRegist:       false
-    IsConfig:       true
-    IsRequired:     false
-    IsConfirm:      false
 pne2mixi:
   _attributes:
-    caption:        "「み」pne→mixi日記設定"
+    caption:        "【未】「み」pne→mixi日記"
     enable_pc:      true
     enable_mobile:  true
   MIXIUSER:
@@ -168,7 +44,7 @@ pne2mixi:
     IsConfirm:      false
 pne2mixivoice:
   _attributes:
-    caption:        "「ぼ」pne→mixiボイス設定(mixi日記と共有)"
+    caption:        "【未】「ぼ」pne→mixiボイス"
     enable_pc:      true
     enable_mobile:  true
   DUMMYVOICE:
@@ -179,242 +55,9 @@ pne2mixivoice:
     IsRegist:       false
     IsConfig:       true
     IsRequired:     false
-pne2twitter:
-  _attributes:
-    caption:        "「つ」pne→twitter設定1"
-    enable_pc:      true
-    enable_mobile:  true
-  TWITTERNAME:
-    Name:           "TWITTERNAME"
-    Caption:        "twitter ログインID"
-    FormType:       "input"
-    ValueType:      "pass"
-    IsRegist:       false
-    IsConfig:       true
-    IsRequired:     false
-    IsConfirm:      false
-  TWITTERPASS:
-    Name:           "TWITTERPASS"
-    Caption:        "twitter パスワード"
-    FormType:       "password"
-    ValueType:      "pass"    
-    IsRegist:       false
-    IsConfig:       true
-    IsRequired:     false
-    IsConfirm:      false
-pne2twitter2:
-  _attributes:
-    caption:        "「い」pne→twitter設定2"
-    enable_pc:      true
-    enable_mobile:  true
-  TWITTERNAME2:
-    Name:           "TWITTERNAME2"
-    Caption:        "twitter ログインID"
-    FormType:       "input"
-    ValueType:      "pass"
-    IsRegist:       false
-    IsConfig:       true
-    IsRequired:     false
-    IsConfirm:      false
-  TWITTERPASS2:
-    Name:           "TWITTERPASS2"
-    Caption:        "twitter パスワード"
-    FormType:       "password"
-    ValueType:      "pass"
-    IsRegist:       false
-    IsConfig:       true
-    IsRequired:     false
-    IsConfirm:      false
-pne2twitter3:
-  _attributes:
-    caption:        "「た」pne→twitter設定3"
-    enable_pc:      true
-    enable_mobile:  true
-  TWITTERNAME3:
-    Name:           "TWITTERNAME3"
-    Caption:        "twitter ログインID"
-    FormType:       "input"
-    ValueType:      "pass"
-    IsRegist:       false
-    IsConfig:       true
-    IsRequired:     false
-    IsConfirm:      false
-  TWITTERPASS3:
-    Name:           "TWITTERPASS3"
-    Caption:        "twitter パスワード"
-    FormType:       "password"
-    ValueType:      "pass"
-    IsRegist:       false
-    IsConfig:       true
-    IsRequired:     false
-    IsConfirm:      false
-OpenPNESites:
-  _attributes:
-    caption:        "pne→OpenPNE設定1"
-    enable_pc:      true
-    enable_mobile:  true
-  SNSKEYWORD1:
-    Name:           "SNSKEYWORD1"
-    Caption:        "1)キーワード"
-    FormType:       "input"
-    ValueType:      "pass"
-    IsRegist:       false
-    IsConfig:       true
-    IsRequired:     false
-    IsConfirm:      false
-  SNSURL1:
-    Name:           "SNSURL1"
-    Caption:        "1)SNSURL ※最後は/"
-    FormType:       "input"
-    ValueType:      "pass"
-    IsRegist:       false
-    IsConfig:       true
-    IsRequired:     false
-    IsConfirm:      false
-  SNSID1:
-    Name:           "SNSID1"
-    Caption:        "1)SNSID"
-    FormType:       "input"
-    ValueType:      "pass"
-    IsRegist:       false
-    IsConfig:       true
-    IsRequired:     false
-    IsConfirm:      false
-  SNSPASS1:
-    Name:           "SNSPASS1"
-    Caption:        "1)SNSPASSWORD"
-    FormType:       "password"
-    ValueType:      "pass"
-    IsRegist:       false
-    IsConfig:       true
-    IsRequired:     false
-    IsConfirm:      false
-OpenPNESites2:
-  _attributes:
-    caption:        "pne→OpenPNE設定2"
-    enable_pc:      true
-    enable_mobile:  true
-  SNSKEYWORD2:
-    Name:           "SNSKEYWORD2"
-    Caption:        "2)キーワード"
-    FormType:       "input"
-    ValueType:      "pass"
-    IsRegist:       false
-    IsConfig:       true
-    IsRequired:     false
-    IsConfirm:      false
-  SNSURL2:
-    Name:           "SNSURL2"
-    Caption:        "2)SNSURL ※最後は/"
-    FormType:       "input"
-    ValueType:      "pass"
-    IsRegist:       false
-    IsConfig:       true
-    IsRequired:     false
-    IsConfirm:      false
-  SNSID2:
-    Name:           "SNSID2"
-    Caption:        "2)SNSID"
-    FormType:       "input"
-    ValueType:      "pass"
-    IsRegist:       false
-    IsConfig:       true
-    IsRequired:     false
-    IsConfirm:      false
-  SNSPASS2:
-    Name:           "SNSPASS2"
-    Caption:        "2)SNSPASSWORD"
-    FormType:       "password"
-    ValueType:      "pass"
-    IsRegist:       false
-    IsConfig:       true
-    IsRequired:     false
-    IsConfirm:      false
-OpenPNESites3:
-  _attributes:
-    caption:        "pne→OpenPNE設定3"
-    enable_pc:      true
-    enable_mobile:  true
-  SNSKEYWORD3:
-    Name:           "SNSKEYWORD3"
-    Caption:        "3)SNSキーワード"
-    FormType:       "input"
-    ValueType:      "pass"
-    IsRegist:       false
-    IsConfig:       true
-    IsRequired:     false
-    IsConfirm:      false
-  SNSURL3:
-    Name:           "SNSURL3"
-    Caption:        "3)SNSURL ※最後は/"
-    FormType:       "input"
-    ValueType:      "pass"
-    IsRegist:       false
-    IsConfig:       true
-    IsRequired:     false
-    IsConfirm:      false
-  SNSID3:
-    Name:           "SNSID3"
-    Caption:        "3)SSNSID"
-    FormType:       "input"
-    ValueType:      "pass"
-    IsRegist:       false
-    IsConfig:       true
-    IsRequired:     false
-    IsConfirm:      false
-  SNSPASS3:
-    Name:           "SNSPASS3"
-    Caption:        "3)SSNSPASSWORD"
-    FormType:       "password"
-    ValueType:      "pass"
-    IsRegist:       false
-    IsConfig:       true
-    IsRequired:     false
-    IsConfirm:      false
-OpenPNESites4:
-  _attributes:
-    caption:        "pne→OpenPNE設定4"
-    enable_pc:      true
-    enable_mobile:  true
-  SNSKEYWORD4:
-    Name:           "SNSKEYWORD4"
-    Caption:        "4)キーワード"
-    FormType:       "input"
-    ValueType:      "pass"
-    IsRegist:       false
-    IsConfig:       true
-    IsRequired:     false
-    IsConfirm:      false
-  SNSURL4:
-    Name:           "SNSURL4"
-    Caption:        "4)SNSURL ※最後は/"
-    FormType:       "input"
-    ValueType:      "pass"
-    IsRegist:       false
-    IsConfig:       true
-    IsRequired:     false
-    IsConfirm:      false
-  SNSID4:
-    Name:           "SNSID4"
-    Caption:        "4)SNSID"
-    FormType:       "input"
-    ValueType:      "pass"
-    IsRegist:       false
-    IsConfig:       true
-    IsRequired:     false
-    IsConfirm:      false
-  SNSPASS4:
-    Name:           "SNSPASS4"
-    Caption:        "4)SNSPASSWORD"
-    FormType:       "password"
-    ValueType:      "pass"
-    IsRegist:       false
-    IsConfig:       true
-    IsRequired:     false
-    IsConfirm:      false
 wordpressSites:
   _attributes:
-    caption:        "pne→WordPress設定1"
+    caption:        "【未】「わ」pne→WordPress"
     enable_pc:      true
     enable_mobile:  true
   WPKEYWORD1:
@@ -473,7 +116,7 @@ wordpressSites:
     IsConfirm:      false
 wordpressSites2:
   _attributes:
-    caption:        "pne→WordPress設定2"
+    caption:        "【未】「ぷ」pne→WordPress"
     enable_pc:      true
     enable_mobile:  true
   WPKEYWORD2:
@@ -532,7 +175,7 @@ wordpressSites2:
     IsConfirm:      false
 RTM:
   _attributes:
-    caption:        "「り」pne→RememberTheMilk設定"
+    caption:        "【未】「り」pne→RememberTheMilk"
     enable_pc:      true
     enable_mobile:  true
   RTMMAIL:
@@ -544,6 +187,59 @@ RTM:
     IsConfig:       true
     IsRequired:     false
     IsConfirm:      false
+mail2pne:
+  _attributes:
+    caption:        "【未】mail→pne"
+    enable_pc:      true
+    enable_mobile:  true
+  MAILKEYWORD:
+    Name:           "MAILKEYWORD"
+    Caption:        "メール投稿用のキーワード"
+    FormType:       "input"
+    ValueType:      "pass"
+    IsRegist:       false
+    IsConfig:       true
+    IsRequired:     false
+    IsConfirm:      false
+twitter2pne:
+  _attributes:
+    caption:        "【未】twitter→pne"
+    enable_pc:      true
+    enable_mobile:  true
+  TWITTERDIRECT:
+    Name:           "TWITTERDIRECT"
+    Caption:        "【ラボ機能】twitterダイレクトモード"
+    FormType:       "radio"
+    Choices:        {1: "使う",2: "使わない"}
+    Default:        "2"
+    ValueType:      "int"
+    IsRegist:       false
+    IsConfig:       true
+    IsRequired:     false
+    IsConfirm:      false
+  TWITTERDIRECT_KEYWORD:
+    Name:           "TWITTERDIRECT_KEYWORD"
+    Caption:        "【ラボ機能】twitterダイレクトモードの投稿キーワード"
+    FormType:       "input"
+    ValueType:      "pass"
+    IsRegist:       false
+    IsConfig:       true
+    IsRequired:     false
+    IsConfirm:      false
+  TWITTER_EXCLUDE:
+    Name:           "TWITTER_EXCLUDE"
+    Caption:        "文頭にこのキーワードが入っていたら投稿しない（半角スペース区切り）"
+    FormType:       "input"
+    ValueType:      "pass"
+    IsRegist:       false
+    IsConfig:       true
+    IsRequired:     false
+    IsConfirm:      false
+twitter2pne2:
+  _attributes:
+    caption:        "twitter→pne"
+    enable_pc:      true
+    enable_mobile:  true
 agent2pne:
   _attributes:
     caption:        "繰り返し自動投稿"
@@ -603,92 +299,49 @@ agent2pne:
     IsConfig:       true
     IsRequired:     false
     IsConfirm:      false
-lunch:
+sepalator:
   _attributes:
-    caption:        "【ラボ機能】ランチランダマイザー"
+    caption:        "件名本文セパレータ"
     enable_pc:      true
     enable_mobile:  true
-  LRSNSURL:
-    Name:           "LRSNSURL"
-    Caption:        "SNSのURL（最後が/）"
+  SEPARATOR_LF:
+    Name:           "SEPARATOR_LF"
+    Caption:        "改行をセパレータにする？"
+    FormType:       "radio"
+    Choices:        {"1":"する","2":"しない"}
+    Default:        "1"
+    ValueType:      "int"
+    IsRegist:       false
+    IsConfig:       true
+    IsRequired:     false
+    IsConfirm:      false
+  SEPARATOR_KEYWORDS:
+    Name:           "SEPARATOR_KEYWORDS"
+    Caption:        "その他のセパレータ文字列（半角スペース区切り）"
     FormType:       "input"
     ValueType:      "pass"
     IsRegist:       false
     IsConfig:       true
     IsRequired:     false
     IsConfirm:      false
-  LRSNSID:
-    Name:           "LRSNSID"
-    Caption:        "SNSID"
-    FormType:       "input"
-    ValueType:      "pass"
-    IsRegist:       false
-    IsConfig:       true
-    IsRequired:     false
-    IsConfirm:      false
-  LRSNSPASS:
-    Name:           "LRSNSPASS"
-    Caption:        "SNSPASSWORD"
-    FormType:       "password"
-    ValueType:      "pass"
-    IsRegist:       false
-    IsConfig:       true
-    IsRequired:     false
-    IsConfirm:      false
-  LRCOMMUID:
-    Name:           "LRCOMMUID"
-    Caption:        "コミュニティID"
-    FormType:       "input"
-    ValueType:      "pass"
-    IsRegist:       false
-    IsConfig:       true
-    IsRequired:     false
-    IsConfirm:      false
-OpenPNECOMMU1:
+calendar2pne:
   _attributes:
-    caption:        "【ラボ機能】pne→OpenPNE設コミュニティ投稿"
+    caption:        "【ラボ機能】GoogleCalendar→pne"
     enable_pc:      true
     enable_mobile:  true
-  SNSKEYWORD_COMMU1:
-    Name:           "SNSKEYWORD_COMMU1"
-    Caption:        "1)キーワード"
+  GOOGLEID:
+    Name:           "GOOGLEID"
+    Caption:        "カレンダー用GOOGLEID"
     FormType:       "input"
     ValueType:      "pass"
     IsRegist:       false
     IsConfig:       true
     IsRequired:     false
     IsConfirm:      false
-  SNSURL_COMMU1:
-    Name:           "SNSURL_COMMU1"
-    Caption:        "1)SNSURL ※最後は/"
-    FormType:       "input"
-    ValueType:      "pass"
-    IsRegist:       false
-    IsConfig:       true
-    IsRequired:     false
-    IsConfirm:      false
-  SNSID_COMMU1:
-    Name:           "SNSID_COMMU1"
-    Caption:        "1)SNSID"
-    FormType:       "input"
-    ValueType:      "pass"
-    IsRegist:       false
-    IsConfig:       true
-    IsRequired:     false
-    IsConfirm:      false
-  SNSPASS_COMMU1:
-    Name:           "SNSPASS_COMMU1"
-    Caption:        "1)SNSPASSWORD"
+  GOOGLEPASS:
+    Name:           "GOOGLEPASS"
+    Caption:        "GOOGLEパスワード"
     FormType:       "password"
-    ValueType:      "pass"
-    IsRegist:       false
-    IsConfig:       true
-    IsRequired:     false
-    IsConfirm:      false
-  SNSTARGETID_COMMU1:
-    Name:           "SNSTARGETID_COMMU1"
-    Caption:        "コミュニティID"
-    FormType:       "input"
     ValueType:      "pass"
     IsRegist:       false
     IsConfig:       true

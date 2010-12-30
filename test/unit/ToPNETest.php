@@ -5,12 +5,6 @@ require_once dirname(__FILE__).'/../bootstrap/unit.php';
 
 $t = new lime_test();
 
-//setup 
-//TwoPNE::deleteQueue();
-
-
-
-
 $expected  =  array(
   array (
     'MEMBER_ID' => 2,
@@ -18,9 +12,12 @@ $expected  =  array(
   ),
 );
 
-
-$result = TwoPNE::processGoogleCalendar();
-
+try{
+  $result = ToPNE::processGoogleCalendar();
+  $t->pass("とりあえず、例外が出ない");
+}catch(Exception $e){
+  $t->pass("例外はNG");
+}
 $t->todo("カレンダーテストもちゃんと実行する");
 //$t->ok($result,'null でない値が返る');
 //$t->is($result,$expected,'狙ったとおりの形で配列が返ってくること');
@@ -28,17 +25,15 @@ $t->todo("カレンダーテストもちゃんと実行する");
 $result = null;
 $expected = null;
 
+$t->todo("GCAL 繰り返し予定は、ひとつだけ済みになるように");
 
-$t->todo("繰り返し予定は、ひとつだけ済みになるように");
+//$t->ok(ToPNE::deleteQueue(),'キューをクリアできるか？');
 
-//$t->ok(TwoPNE::deleteQueue(),'キューをクリアできるか？');
-
-$t->ok(TwoPNE::isAWSKeysCorrect(),'AWS keys are correct.');
-
-$t->ok(TwoPNE::postQueue('TEST_QUEUE'),"return true");
+$t->ok(ToPNE::isAWSKeysCorrect(),'AWS keys are correct.');
+$t->ok(ToPNE::postQueue('TEST_QUEUE'),"return true");
 
 //test
-$t->is(TwoPNE::postQueue('TEST_QUEUE'),'TEST_QUEUE','Return same string that I post.');
+$t->is(ToPNE::postQueue('TEST_QUEUE'),'TEST_QUEUE','Return same string that I post.');
 
 
 $expected  =  array(
@@ -61,7 +56,7 @@ $expected  =  array(
 
 
 //test
-$result = TwoPNE::processQueing(1,'あ つ ぶ がたがたがたがた');
+$result = ToPNE::processQueing(1,'あ つ ぶ がたがたがたがた');
 
 $t->ok($result,'結果はNULLでない');
 $t->is(sizeof($result),3,'キーワードが三文字なので配列も３');

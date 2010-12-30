@@ -1,5 +1,5 @@
 <?php
-class TwoPNE
+class ToPNE
 {
   //private static $instance;
 
@@ -11,6 +11,10 @@ class TwoPNE
     return TwipneQueue::$instance;
   }
   */
+
+
+
+
   public static function processGoogleCalendar(){
     $q = Doctrine_Query::create()
     ->select('mc.member_id,mc.value')->from('MemberConfig mc')->where('mc.name = ?','GOOGLEID');
@@ -105,13 +109,15 @@ class TwoPNE
       $command = ($result) ? $_m[1] : null ;
       $body = ($result) ? $_m[3] : $message;
 
+
+/*
       $act = new ActivityData();
       $act->setMemberId($member_id);
       $act->setBody("【成功】".$body);
       $act->setPublicFlag(ActivityDataTable::PUBLIC_FLAG_PRIVATE);
       $act->setIsPc(true);
       $act->save();
-
+*/
       // set basic parameters
       $params = array();
       $params['MEMBER_ID'] = $member_id;

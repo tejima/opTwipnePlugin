@@ -4,14 +4,15 @@ include(dirname(__FILE__).'/../bootstrap/Doctrine.php');
 require_once dirname(__FILE__).'/../bootstrap/unit.php';
 
 $t = new lime_test();
-
-
 $message_arr =
   array (
     'MEMBER_ID' => 2,
     'STATUS' => 'gatagatamichi',
     'KEYWORD' => 'つ',
   );
+
+$t->todo("すでに入っているキューをカラにする");
+$t->todo("テスト用のキューをセットする");
 
 try{
   $result = PNE2::pne2twitter($message_arr);

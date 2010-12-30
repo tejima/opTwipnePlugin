@@ -1,13 +1,17 @@
 <?php
 class PNE2
 {
-  public static function processKeyword()
+  public static function getQueueFromSQS()
   {
     $aws_accesskey = opConfig::get('optwipneplugin_aws_accesskey',null);
     $aws_secret = opConfig::get('optwipneplugin_aws_secret',null);
     $sqs = new Zend_Service_Amazon_Sqs($aws_accesskey, $aws_secret);
     $queue_url = $sqs->create('twipne_queue');
-    foreach ($sqs->receive($queue_url,5,3) as $message){
+    return $sqs->receive($queue_url,5,3);
+  }
+  public static function processKeyword($message_list)
+  {
+    foreach ($message_list as $message){
       $_params = unserialize($message['body']);
       $_keyword = $_params['KEYWORD'];
 
@@ -27,7 +31,7 @@ class PNE2
           $result = self::pne2mixiVoice($_params);
           break;
         case("つ"):
-          $result = self::pne2Twitter($_params);
+          $result = self::pne2twitter($_params);
           break;
         case("ふ"):
         case("ふ"):
@@ -192,11 +196,11 @@ class PNE2
     $body        = $params['body'];
 
      // WSSE Authentication
-      $nonce       = pack('H*', sha1(md5(time().rand().posix_getpid())));
-      $created     = date('Y-m-d\TH:i:s\Z');
-      $digest      = base64_encode(pack('H*', sha1($nonce . $created . $pass)));
-      $wsse_text   = 'UsernameToken Username="%s", PasswordDigest="%s", Nonce="%s", Created="%s"';
-      $wsse_header = sprintf($wsse_text, $user, $digest, base64_encode($nonce), $created);
+    $nonce       = pack('H*', sha1(md5(time().rand().posix_getpid())));
+    $created     = date('Y-m-d\TH:i:s\Z');
+    $digest      = base64_encode(pack('H*', sha1($nonce . $created . $pass)));
+    $wsse_text   = 'UsernameToken Username="%s", PasswordDigest="%s", Nonce="%s", Created="%s"';
+    $wsse_header = sprintf($wsse_text, $user, $digest, base64_encode($nonce), $created);
 
     // mixi POST URL
       $url         = 'http://mixi.jp/atom/diary/member_id=' . $id;
@@ -207,14 +211,6 @@ class PNE2
        . '<summary>'.$body.'</summary>'
        . '</entry>'  ;  //
 
-
-
-
-      //
-
-
-      echo $wsse_header . "\n";
-      echo $post_data . "\n";
       $request = new HTTP_Request($url);
       $request->setMethod(HTTP_REQUEST_METHOD_POST);
       $request->addHeader('X-WSSE', $wsse_header);
@@ -233,13 +229,12 @@ class PNE2
     $_member =  Doctrine::getTable('Member')->find($_params['MEMBER_ID']);
     $_status = mb_substr($_params['STATUS'],0,140,'UTF-8');
     try{
-      if($_member->getConfig('oauth_token') && $_member->getConfig('oauth_token_secret')){
+      if($_member->getConfig('twitter_oauth_token') && $_member->getConfig('twitter_oauth_token_secret')){
         $consumer_key = opConfig::get('op_auth_WithTwitter_plugin_awt_consumer',null);
         $consumer_secret = opConfig::get('op_auth_WithTwitter_plugin_awt_secret',null);
 
-        $to = new TwitterOAuth($consumer_key,$consumer_secret,$_member->getConfig('oauth_token'),$_member->getConfig('oauth_token_secret'));
+        $to = new TwitterOAuth($consumer_key,$consumer_secret,$_member->getConfig('twitter_oauth_token'),$_member->getConfig('twitter_oauth_token_secret'));
         $req = $to->OAuthRequest('https://twitter.com/statuses/update.xml',array('status'=>$_status),'POST');
-        echo $to->lastStatusCode(); 
         if($to->lastStatusCode()=='200'){
           $result = true;
         }else{
@@ -249,7 +244,6 @@ class PNE2
         throw new Exception("EMPTY_MEMBER_SETTING");
       }
     }catch(Exception $e){
-      echo "twitter 失敗". $e->getMessage() ."\n";
       $result = false;
     }
     return $result;
@@ -378,10 +372,13 @@ class PNE2
     return $result;
   }
   public static function addEntry($member_id,$meta,$body){
-    $entry = new Entry();
-    $entry->member_id = $member_id;
-    $entry->meta = $meta;
-    $entry->body = $body;
-    $entry->save();
+
+    $act = new ActivityData();
+    $act->setMemberId($member_id);
+    $act->setBody("【成功】" . $meta . $body);
+    $act->setPublicFlag(ActivtyDataTable::PUBLIC_FLAG_PRIVATE);
+    $act->setIsPc(true);
+    $act->save();
+
   }
 }
