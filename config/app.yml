@@ -1,0 +1,4 @@
+test:
+  twipne_queue_name: twipne_queue_test
+prod:
+  twipne_queue_name: twipne_queue

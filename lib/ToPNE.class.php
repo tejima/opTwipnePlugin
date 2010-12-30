@@ -93,7 +93,7 @@ class ToPNE
     $aws_secret = opConfig::get('optwipneplugin_aws_secret',null);
     $sqs = new Zend_Service_Amazon_Sqs($aws_accesskey, $aws_secret);
     try{
-      $queue_url = $sqs->create('twipne_queue');
+      $queue_url = $sqs->create(sfConfig::get('app_twipne_queue_name'));
       $sqs->send($queue_url, $message);
     }catch(Exception $e){
       return null;
@@ -146,7 +146,7 @@ class ToPNE
     $aws_secret = opConfig::get('optwipneplugin_aws_secret',null);
     $sqs = new Zend_Service_Amazon_Sqs($aws_accesskey, $aws_secret);
     try{
-      $queue_url = $sqs->create('twipne_queue');
+      $queue_url = $sqs->create(sfConfig::get('app_twipne_queue_name'));
       $result = $sqs->count($queue_url);
     }catch(Exception $e){
       return null;
@@ -159,7 +159,7 @@ class ToPNE
     $aws_secret = opConfig::get('optwipneplugin_aws_secret',null);
     $sqs = new Zend_Service_Amazon_Sqs($aws_accesskey, $aws_secret);
     try{
-      $queue_url = $sqs->create('twipne_queue');
+      $queue_url = $sqs->create(sfConfig::get('app_twipne_queue_name'));
       $sqs->delete($queue_url);
     }catch(Exception $e){
       return null;
